@@ -14,6 +14,8 @@ from drafting.workflow import DraftStatus
 from .serializers import DraftFactIntakeSerializer
 
 from transition_engine.services import map_ipc_to_bns
+
+from drafting.ai_drafting import generate_ai_draft
 class DraftTypeListView(APIView):
     def get(self, request):
         draft_types = DraftType.objects.all()
@@ -172,6 +174,48 @@ class DraftGenerateView(APIView):
             {
                 "status": draft.status,
                 "draft_blueprint": blueprint
+            },
+            status=status.HTTP_200_OK
+        )
+
+class DraftAIDraftingView(APIView):
+    def post(self, request, draft_id):
+        try:
+            draft = Draft.objects.get(
+                id=draft_id,
+                user=request.user
+            )
+        except Draft.DoesNotExist:
+            return Response(
+                {"error": "Draft not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        try:
+            blueprint = {
+                "facts": {f.key: f.value for f in draft.facts.all()},
+                "legal_basis": [
+                    {
+                        "ipc": str(m.ipc_section),
+                        "bns": str(m.bns_section),
+                        "intent": m.intent
+                    }
+                    for m in draft.legal_mappings.all()
+                ]
+            }
+
+            ai_text = generate_ai_draft(draft, blueprint)
+
+        except Exception as e:
+            return Response(
+                {"error": str(e)},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        return Response(
+            {
+                "status": draft.status,
+                "draft_text": ai_text
             },
             status=status.HTTP_200_OK
         )
