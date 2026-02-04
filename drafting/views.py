@@ -16,6 +16,8 @@ from .serializers import DraftFactIntakeSerializer
 from transition_engine.services import map_ipc_to_bns
 
 from drafting.ai_drafting import generate_ai_draft
+from drafting.docx_export import export_draft_to_docx
+
 class DraftTypeListView(APIView):
     def get(self, request):
         draft_types = DraftType.objects.all()
@@ -216,6 +218,42 @@ class DraftAIDraftingView(APIView):
             {
                 "status": draft.status,
                 "draft_text": ai_text
+            },
+            status=status.HTTP_200_OK
+        )
+class DraftExportView(APIView):
+    def post(self, request, draft_id):
+        try:
+            draft = Draft.objects.get(
+                id=draft_id,
+                user=request.user
+            )
+        except Draft.DoesNotExist:
+            return Response(
+                {"error": "Draft not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        draft_text = request.data.get("draft_text")
+
+        if not draft_text:
+            return Response(
+                {"error": "Draft text required"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        try:
+            path = export_draft_to_docx(draft, draft_text)
+        except Exception as e:
+            return Response(
+                {"error": str(e)},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        return Response(
+            {
+                "status": draft.status,
+                "file_path": path
             },
             status=status.HTTP_200_OK
         )
