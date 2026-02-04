@@ -17,7 +17,7 @@ from transition_engine.services import map_ipc_to_bns
 
 from drafting.ai_drafting import generate_ai_draft
 from drafting.docx_export import export_draft_to_docx
-
+from drafting.models import DraftContent
 class DraftTypeListView(APIView):
     def get(self, request):
         draft_types = DraftType.objects.all()
@@ -207,7 +207,13 @@ class DraftAIDraftingView(APIView):
             }
 
             ai_text = generate_ai_draft(draft, blueprint)
+            latest_version = draft.contents.count() + 1
 
+            DraftContent.objects.create(
+                draft=draft,
+                content=ai_text,
+                version=latest_version
+            )
         except Exception as e:
             return Response(
                 {"error": str(e)},
@@ -234,7 +240,15 @@ class DraftExportView(APIView):
                 status=status.HTTP_404_NOT_FOUND
             )
 
-        draft_text = request.data.get("draft_text")
+        latest_content = draft.contents.order_by("-version").first()
+
+        if not latest_content:
+            return Response(
+                {"error": "No draft content available"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        draft_text = latest_content.content
 
         if not draft_text:
             return Response(

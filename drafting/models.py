@@ -70,3 +70,16 @@ class DraftLegalMapping(models.Model):
 
     def __str__(self):
         return f"{self.ipc_section} → {self.bns_section}"
+    
+class DraftContent(models.Model):
+    draft = models.ForeignKey(
+        Draft,
+        on_delete=models.CASCADE,
+        related_name="contents"
+    )
+    content = models.TextField()
+    version = models.PositiveIntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Draft {self.draft.id} v{self.version}"
