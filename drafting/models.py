@@ -45,3 +45,28 @@ class DraftFact(models.Model):
 
     def __str__(self):
         return f"{self.key}: {self.value}"
+
+from transition_engine.models import LegalSection
+
+class DraftLegalMapping(models.Model):
+    draft = models.ForeignKey(
+        Draft,
+        on_delete=models.CASCADE,
+        related_name="legal_mappings"
+    )
+    ipc_section = models.ForeignKey(
+        LegalSection,
+        on_delete=models.PROTECT,
+        related_name="+"
+    )
+    bns_section = models.ForeignKey(
+        LegalSection,
+        on_delete=models.PROTECT,
+        related_name="+"
+    )
+    intent = models.CharField(max_length=255)
+    drafting_note = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.ipc_section} → {self.bns_section}"
