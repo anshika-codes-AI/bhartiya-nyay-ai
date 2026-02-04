@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from drafting.draft_generation import generate_draft_blueprint
 # Create your views here.
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -144,6 +144,34 @@ class DraftLegalMappingView(APIView):
                     }
                     for m in draft.legal_mappings.all()
                 ]
+            },
+            status=status.HTTP_200_OK
+        )
+class DraftGenerateView(APIView):
+    def post(self, request, draft_id):
+        try:
+            draft = Draft.objects.get(
+                id=draft_id,
+                user=request.user
+            )
+        except Draft.DoesNotExist:
+            return Response(
+                {"error": "Draft not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        try:
+            blueprint = generate_draft_blueprint(draft)
+        except Exception as e:
+            return Response(
+                {"error": str(e)},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        return Response(
+            {
+                "status": draft.status,
+                "draft_blueprint": blueprint
             },
             status=status.HTTP_200_OK
         )
