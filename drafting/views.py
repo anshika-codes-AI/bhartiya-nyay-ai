@@ -7,7 +7,7 @@ from rest_framework import status
 
 from .models import Draft, DraftType
 from .serializers import DraftCreateSerializer, DraftTypeSerializer
-
+from drafting.models import DraftLegalMapping
 from .models import DraftFact
 from .services import transition_draft
 from drafting.workflow import DraftStatus
@@ -48,7 +48,7 @@ class DraftFactIntakeView(APIView):
         # Only allow fact intake at CREATED stage
         if draft.status != DraftStatus.CREATED.value:
             return Response(
-                {"error": "Facts already submitted"},
+                {"error": "Draft is no longer in CREATED state"},
                 status=status.HTTP_400_BAD_REQUEST
             )
 
@@ -100,29 +100,50 @@ class DraftLegalMappingView(APIView):
 
         # Extract IPC sections from facts
         facts = {f.key: f.value for f in draft.facts.all()}
-        sections = facts.get("SECTIONS_INVOKED", [])
+        raw_sections = facts.get("SECTIONS_INVOKED", [])
+
+        if isinstance(raw_sections, str):
+            # handle comma-separated or single value
+            sections = [s.strip() for s in raw_sections.split(",")]
+        else:
+            sections = raw_sections
 
         mappings = map_ipc_to_bns(sections)
-
+        
         if not mappings:
             return Response(
                 {"error": "No mappings found"},
                 status=status.HTTP_400_BAD_REQUEST
             )
-
+        if draft.legal_mappings.exists():
+            return Response(
+                {"error": "Legal mapping already completed"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        # Save mapping to DB
+        for mapping in mappings:
+            DraftLegalMapping.objects.create(
+                draft=draft,
+                ipc_section=mapping.ipc_section,
+                bns_section=mapping.bns_section,
+                intent=mapping.intent,
+                drafting_note=mapping.drafting_note
+            )
         # Transition workflow
         transition_draft(draft, DraftStatus.LEGAL_MAPPED)
 
         return Response(
             {
                 "status": draft.status,
-                "mapped_sections": [
+                "legal_basis": [
                     {
                         "ipc": str(m.ipc_section),
                         "bns": str(m.bns_section),
-                        "intent": m.intent
+                        "intent": m.intent,
+                        "drafting_note": m.drafting_note,
                     }
-                    for m in mappings
+                    for m in draft.legal_mappings.all()
                 ]
-            }
+            },
+            status=status.HTTP_200_OK
         )
