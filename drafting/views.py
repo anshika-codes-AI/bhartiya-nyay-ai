@@ -13,7 +13,7 @@ from .services import transition_draft
 from drafting.workflow import DraftStatus
 from .serializers import DraftFactIntakeSerializer
 
-
+from transition_engine.services import map_ipc_to_bns
 class DraftTypeListView(APIView):
     def get(self, request):
         draft_types = DraftType.objects.all()
@@ -77,4 +77,52 @@ class DraftFactIntakeView(APIView):
         return Response(
             {"status": draft.status},
             status=status.HTTP_200_OK
+        )
+    
+class DraftLegalMappingView(APIView):
+    def post(self, request, draft_id):
+        try:
+            draft = Draft.objects.get(
+                id=draft_id,
+                user=request.user
+            )
+        except Draft.DoesNotExist:
+            return Response(
+                {"error": "Draft not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        if draft.status != DraftStatus.FACTS_COLLECTED.value:
+            return Response(
+                {"error": "Facts not collected yet"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Extract IPC sections from facts
+        facts = {f.key: f.value for f in draft.facts.all()}
+        sections = facts.get("SECTIONS_INVOKED", [])
+
+        mappings = map_ipc_to_bns(sections)
+
+        if not mappings:
+            return Response(
+                {"error": "No mappings found"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Transition workflow
+        transition_draft(draft, DraftStatus.LEGAL_MAPPED)
+
+        return Response(
+            {
+                "status": draft.status,
+                "mapped_sections": [
+                    {
+                        "ipc": str(m.ipc_section),
+                        "bns": str(m.bns_section),
+                        "intent": m.intent
+                    }
+                    for m in mappings
+                ]
+            }
         )
