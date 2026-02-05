@@ -7,8 +7,11 @@
 
 ## 🚀 Getting Started
 
-New here?  
-👉 Start with [START.md](START.md)
+New here?
+
+- 👉 Start with [START.md](START.md) for project setup and technical overview  
+- 👉 Read the [User Guide](USER_GUIDE.md) for step-by-step usage instructions (for advocates)
+
 
 ---
 
