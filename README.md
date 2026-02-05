@@ -1,88 +1,97 @@
 # Bhartiya Nyay AI
 
-> **A workflow-first, BNS/BNSS-native Legal Drafting Assistant for Indian Advocates**
+> **A workflow-first, BNS/BNSS-native Legal Drafting Assistant for Indian Advocates**  
 > Built to solve the post-IPC “Year Zero” transition with trust, structure, and auditability.
 
 ---
+
 ## 🚀 Getting Started
 
 New here?  
 👉 Start with [START.md](START.md)
 
+---
+
 ## 📌 Project Philosophy
 
 Bhartiya Nyay AI is **not a chatbot**.
 
-It is a **legal workflow engine** that mirrors how real advocates work:
+It is a **law-governed drafting system** that mirrors how real advocates think and work:
 
-* Facts first
-* Law mapping second
-* Drafting only after legal grounding
-* Mandatory human review
-* File-ready court documents
+- Facts before drafting  
+- Statutory grounding before AI  
+- Judicial support before arguments  
+- Mandatory human review  
+- Court-ready output, not chat text  
 
 Every design decision in this codebase prioritizes:
 
-* ❌ Zero hallucination tolerance
-* 📜 Auditability (court-defensible)
-* ⚖️ Legal discipline over AI freedom
+- ❌ Zero tolerance for hallucinated law  
+- 📜 Auditability and traceability  
+- ⚖️ Legal discipline over AI creativity  
 
 ---
 
 ## 🧠 High-Level Architecture
-
 ```
 User
- ↓
+↓
 Draft Creation
- ↓
-Guided Fact Intake (Validated)
- ↓
+↓
+Structured Fact Intake (Validated)
+↓
 IPC → BNS Legal Mapping (Intent-based)
- ↓
-Draft Blueprint Generation (No AI)
- ↓
-Controlled AI Drafting (Review Mandatory)
- ↓
+↓
+Draft Blueprint Generation (Deterministic)
+↓
+RAG-Based Judicial Retrieval
+↓
+Citation-Locked AI Drafting
+↓
+Mandatory Advocate Review
+↓
 DOCX Export (Court-Ready)
 ```
 
-> **RAG (case-law retrieval)** will be inserted **after Legal Mapping** and before Draft Generation.
+AI is never allowed to operate on raw data or free text.  
+All reasoning flows through controlled layers.
 
 ---
 
 ## 🏗️ Tech Stack
 
-* **Backend:** Django + Django REST Framework
-* **Architecture:** Workflow-gated services (not prompt-based)
-* **AI (current):** Mocked / controlled (LLM pluggable later)
-* **Docs Export:** `python-docx`
-* **Database:** SQLite (dev) → PostgreSQL (prod-ready)
+- **Backend:** Django + Django REST Framework  
+- **Architecture:** Workflow-gated services (not prompt-first)  
+- **AI Layer:** Controlled, LLM-agnostic (OpenAI / Gemini pluggable)  
+- **RAG:** Section-scoped, intent-aware retrieval  
+- **Docs Export:** `python-docx`  
+- **Database:** SQLite (development) → PostgreSQL (production-ready)  
 
 ---
 
 ## 📂 Project Structure
-
 ```
 bhartiya_nyay_ai/
-├── users/                 # Advocate identity (minimal, OTP-ready)
-├── drafting/              # Core drafting workflow
-│   ├── models.py
-│   ├── workflow.py
-│   ├── services.py
-│   ├── fact_definitions.py
-│   ├── draft_blueprint.py
-│   ├── ai_prompts.py
-│   ├── ai_drafting.py
-│   ├── docx_export.py
-│   ├── views.py
-│   └── urls.py
-├── transition_engine/     # IPC → BNS / BNSS logic
-│   ├── models.py
-│   └── services.py
-├── legal_rag/             # RAG foundation (judgments + chunks)
-│   ├── models.py
-│   └── admin.py
+├── users/ # Advocate identity (custom user model)
+├── drafting/ # Core drafting workflow
+│ ├── models.py
+│ ├── workflow.py
+│ ├── services.py
+│ ├── fact_definitions.py
+│ ├── draft_blueprint.py
+│ ├── ai_prompts.py
+│ ├── ai_drafting.py
+│ ├── docx_export.py
+│ ├── views.py
+│ └── urls.py
+├── transition_engine/ # IPC → BNS / BNSS mapping logic
+│ ├── models.py
+│ └── services.py
+├── legal_rag/ # Judicial RAG system
+│ ├── models.py
+│ ├── ingestion.py
+│ ├── retrieval.py
+│ └── admin.py
 ├── manage.py
 └── README.md
 ```
@@ -93,73 +102,65 @@ bhartiya_nyay_ai/
 
 ### 1. Workflow First (Not Chat First)
 
-No step can be skipped.
+No legal step can be skipped.
 
-Draft lifecycle:
-
+Draft lifecycle is strictly enforced:
 ```
 CREATED
- → FACTS_COLLECTED
- → LEGAL_MAPPED
- → DRAFT_GENERATED
- → REVIEWED
- → EXPORTED
+→ FACTS_COLLECTED
+→ LEGAL_MAPPED
+→ DRAFT_GENERATED
+→ REVIEWED
+→ EXPORTED
 ```
 
-All transitions are enforced centrally.
+All transitions are validated centrally.
 
 ---
 
 ### 2. Structured Fact Intake (Anti-Hallucination Layer)
 
-Facts are **not free text**.
+Facts are **schema-driven**, not free text.
 
-Each draft type has a **fact schema** defining:
-
-* Allowed keys
-* Required vs optional facts
-* Expected data types
+Each draft type defines:
+- Allowed fact keys  
+- Required vs optional fields  
+- Expected data types  
 
 Example (BNSS Bail):
+- FIR_NUMBER (string)  
+- DATE_OF_ARREST (date)  
+- CUSTODY_DURATION_DAYS (number)  
+- SECTIONS_INVOKED (list)  
 
-* FIR_NUMBER (string)
-* DATE_OF_ARREST (date)
-* CUSTODY_DURATION_DAYS (number)
-* SECTIONS_INVOKED (list)
-
-❌ Unknown facts are rejected
-❌ Missing required facts are blocked
-❌ Wrong data types are rejected
+Invalid or missing facts block progression.
 
 ---
 
 ### 3. Legal Mapping Engine (IPC → BNS)
 
-Instead of mapping section numbers blindly, Bhartiya Nyay AI maps:
+Mapping is not numeric substitution.
 
-* **IPC Section → BNS Section**
-* **Legal intent**
-* **Drafting notes**
+Each mapping stores:
+- IPC Section  
+- Corresponding BNS Section  
+- Legal intent  
+- Drafting notes  
 
-This solves the post-IPC transition problem at the **reasoning level**, not just numerically.
-
-Mapped law is:
-
-* Persisted per draft
-* Immutable once saved
-* Used as the legal basis for drafting
+Mapped law becomes the **immutable legal basis** for drafting.
 
 ---
 
 ### 4. Draft Blueprint (AI-Free Core)
 
-Before AI is ever called, the system generates a **Draft Blueprint**:
+Before AI is ever invoked, the system builds a deterministic **Draft Blueprint**:
 
 ```json
 {
   "draft_type": "BAIL_BNSS",
   "facts": {...},
   "legal_basis": [...],
+  "citations": [...],
   "sections": {
     "facts": true,
     "grounds": true,
@@ -170,59 +171,80 @@ Before AI is ever called, the system generates a **Draft Blueprint**:
 
 This blueprint is:
 
-* Deterministic
+* Predictable
+
 * Auditable
+
 * Reusable
 
-AI never sees raw DB data — only this blueprint.
+AI never accesses raw database records.
+---
+### 5. RAG (Retrieval-Augmented Generation)
 
+Judicial precedents are retrieved using a law-scoped RAG system:
+
+* Judgments are ingested and chunked
+
+* Each chunk carries section + intent metadata
+
+* Retrieval is scoped by mapped BNS sections
+
+* Ranking is intent-aware
+
+If no relevant precedent exists, the system explicitly records this.
 ---
 
-### 5. Controlled AI Drafting (Human-in-the-Loop)
+### 6. Citation-Locked AI Drafting (Human-in-the-Loop)
 
-AI is treated as a **junior drafting clerk**:
+AI behaves like a junior drafting clerk, not an authority.
 
-Rules enforced via prompt + code:
+Strict rules enforced:
 
 * Use only provided facts
-* Use only provided law
-* No invented citations
-* Neutral placeholders if data is insufficient
+
+* Use only mapped law
+
+* Cite only retrieved judgments
+
+* Never invent or recall case law
+
+If citations are empty, AI must clearly state so.
 
 AI output:
 
-* Is **never auto-finalized**
-* Always moves draft to `REVIEWED`
+* Is versioned
 
+* Is never auto-finalized
+
+* Always requires advocate review
 ---
 
-### 6. Draft Versioning & Audit Trail
+### 7. Draft Versioning & Audit Trail
 
-Every AI draft is stored as a **versioned DraftContent**:
+Every AI-generated draft is stored as a version:
 
-* v1, v2, v3...
-* No overwrites
+* v1, v2, v3…
+
+* No overwriting
+
 * Full history preserved
 
-This allows:
-
-* Re-exporting
-* Comparison
-* Court defensibility
-
+This enables auditability and court defensibility.
 ---
 
-### 7. DOCX Export (Lawyer Reality)
+### 8. DOCX Export (Lawyer Reality)
 
-Drafts are exported as **court-ready DOCX files**:
+Final drafts are exported as court-ready DOCX files:
 
 * Times New Roman
-* 12 pt
-* 1.5 spacing
-* Editable in MS Word
 
-Export is allowed **only after review**.
+* 12 pt font
 
+* 1.5 line spacing
+
+* Fully editable
+
+Export is allowed only after review.
 ---
 
 ## 🔌 API Workflow Summary
@@ -251,60 +273,36 @@ Export is allowed **only after review**.
 
    * `POST /api/drafts/{id}/export/`
 
----
-
-## 📚 RAG (Retrieval-Augmented Generation) — Status
-
-### ✅ Completed
-
-* Judgment model
-* JudgmentChunk model
-* Section-aware metadata
-
-### 🔜 Upcoming
-
-* Judgment ingestion (PDF/text → chunks)
-* Embeddings + vector search
-* Section-scoped retrieval
-* Citation injection into blueprint
-
-RAG will:
-
-* Retrieve **only relevant case law**
-* Be scoped by **mapped BNS sections + intent**
-* Never allow AI to invent citations
-
----
-
+--- 
 ## 🚀 Current MVP Capabilities
 
 ✔ Workflow-enforced legal drafting
-✔ BNS/BNSS-native reasoning
+✔ BNS/BNSS-native statutory reasoning
 ✔ Anti-hallucination fact intake
-✔ Intent-based law mapping
-✔ Versioned AI drafts
+✔ Intent-based IPC → BNS mapping
+✔ RAG-backed judicial citations
+✔ Citation-locked AI drafting
+✔ Versioned drafts
 ✔ Court-ready DOCX export
 
----
+## 🧭 Roadmap
 
-## 🧭 Roadmap (Next Extensions)
+* 🎨 Frontend (Stitch AI)
 
-* 🔎 Full RAG integration (case-law citations)
+* ☁️ Production deployment (PostgreSQL + cloud)
+
 * 🔐 OTP-based advocate authentication
-* 🧩 Court-specific templates
-* 🌐 Frontend (Stitch AI)
-* ☁️ Production deployment (Postgres + cloud)
 
----
+* 📚 Expanded judgment corpus
+
+* 🧩 Court-specific drafting templates
 
 ## 🧑‍⚖️ Final Note
 
-Bhartiya Nyay AI is built with a simple belief:
+Bhartiya Nyay AI is built on one principle:
 
 > **Legal AI must behave like law, not like chat.**
 
-This repository represents a **court-defensible foundation**, not a demo.
+This repository represents a **court-defensible MVP foundation**, not a demo.
 
----
-
-*This README will be extended as RAG and frontend layers are implemented.*
+This README will continue to evolve as frontend and deployment layers are added.
