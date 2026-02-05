@@ -276,14 +276,14 @@ Export is allowed only after review.
 --- 
 ## 🚀 Current MVP Capabilities
 
-✔ Workflow-enforced legal drafting
-✔ BNS/BNSS-native statutory reasoning
-✔ Anti-hallucination fact intake
-✔ Intent-based IPC → BNS mapping
-✔ RAG-backed judicial citations
-✔ Citation-locked AI drafting
-✔ Versioned drafts
-✔ Court-ready DOCX export
+* ✔ Workflow-enforced legal drafting
+* ✔ BNS/BNSS-native statutory reasoning
+* ✔ Anti-hallucination fact intake
+* ✔ Intent-based IPC → BNS mapping
+* ✔ RAG-backed judicial citations
+* ✔ Citation-locked AI drafting
+* ✔ Versioned drafts
+* ✔ Court-ready DOCX export
 
 ## 🧭 Roadmap
 
