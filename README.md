@@ -4,6 +4,10 @@
 > Built to solve the post-IPC “Year Zero” transition with trust, structure, and auditability.
 
 ---
+## 🚀 Getting Started
+
+New here?  
+👉 Start with [START.md](START.md)
 
 ## 📌 Project Philosophy
 
