@@ -3,6 +3,39 @@ from drafting.workflow import DraftStatus
 from drafting.services import transition_draft
 from drafting.ai_prompts import DRAFTING_SYSTEM_PROMPT
 
+
+
+def build_ai_prompt(blueprint):
+    citations = blueprint.get("citations", [])
+
+    user_prompt = f"""
+DRAFT TYPE:
+{blueprint["draft_type"]}
+
+FACTS:
+{blueprint["facts"]}
+
+LEGAL BASIS:
+{blueprint["legal_basis"]}
+
+CITATIONS (USE ONLY THESE):
+{citations}
+
+INSTRUCTIONS:
+- Draft the document sections requested.
+- Follow the STRICT RULES.
+"""
+
+    return [
+        {"role": "system", "content": DRAFTING_SYSTEM_PROMPT},
+        {"role": "user", "content": user_prompt},
+    ]
+
+def assert_citation_safety(blueprint):
+    if not blueprint.get("citations"):
+        return "NO_CITATIONS"
+    return "CITATIONS_AVAILABLE"
+
 # placeholder LLM call (we'll plug real one later)
 def call_llm(system_prompt, user_payload):
     """
