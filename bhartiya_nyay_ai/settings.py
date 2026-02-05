@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'legal_rag',
     'documents',
 ]
+AUTH_USER_MODEL = "users.User"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

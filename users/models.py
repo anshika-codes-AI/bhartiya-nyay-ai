@@ -1,11 +1,15 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
-class User(models.Model):
-    phone_number = models.CharField(max_length=15, unique=True)
-    full_name = models.CharField(max_length=255)
-    is_active = models.BooleanField(default=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+class User(AbstractUser):
+    """
+    Custom user model for advocates.
+    Extend safely without breaking Django auth.
+    """
+
+    # Example extra field (optional)
+    # phone_number = models.CharField(max_length=15, blank=True)
 
     def __str__(self):
-        return self.full_name
+        return self.username
