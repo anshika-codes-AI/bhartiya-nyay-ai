@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login - Bhartiya Nyay AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0a47c2",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"],
+                        "sans": ["Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex items-center justify-center font-display antialiased text-[#111318] dark:text-white p-4">
+<div class="w-full max-w-[400px] flex flex-col items-center">
+<!-- Logo / Header -->
+<div class="flex flex-col items-center justify-center mb-8 text-center">
+<div class="mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-[32px]">balance</span>
+</div>
+<h1 class="text-primary dark:text-white tracking-tight text-[28px] font-bold leading-tight">Bhartiya Nyay AI</h1>
+<p class="text-[#606e8a] dark:text-gray-400 text-sm font-sans mt-2">Secure access for legal professionals</p>
+</div>
+<!-- Login Card -->
+<div class="w-full bg-white dark:bg-[#1A202C] rounded-xl shadow-sm border border-[#dbdfe6] dark:border-gray-700 overflow-hidden p-6 sm:p-8">
+<form action="#" class="flex flex-col gap-6" method="POST">
+<!-- Email Field -->
+<div class="flex flex-col gap-2">
+<label class="text-[#111318] dark:text-gray-200 text-sm font-semibold leading-normal font-sans" for="email">Email or Username</label>
+<div class="relative flex items-center">
+<span class="absolute left-4 text-[#606e8a] dark:text-gray-500 material-symbols-outlined text-[20px]">mail</span>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111318] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#dbdfe6] dark:border-gray-600 bg-white dark:bg-[#2D3748] focus:border-primary h-12 pl-11 pr-4 placeholder:text-[#606e8a] dark:placeholder:text-gray-500 text-base font-normal leading-normal font-sans transition-all duration-200" id="email" name="email" placeholder="advocate@example.com" type="email" value=""/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="flex flex-col gap-2">
+<label class="text-[#111318] dark:text-gray-200 text-sm font-semibold leading-normal font-sans" for="password">Password</label>
+<div class="relative flex items-center">
+<span class="absolute left-4 text-[#606e8a] dark:text-gray-500 material-symbols-outlined text-[20px]">lock</span>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111318] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#dbdfe6] dark:border-gray-600 bg-white dark:bg-[#2D3748] focus:border-primary h-12 pl-11 pr-12 placeholder:text-[#606e8a] dark:placeholder:text-gray-500 text-base font-normal leading-normal font-sans transition-all duration-200" id="password" name="password" placeholder="Enter your password" type="password" value=""/>
+<button class="absolute right-0 top-0 bottom-0 px-4 flex items-center justify-center text-[#606e8a] hover:text-primary transition-colors focus:outline-none" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<!-- Submit Button -->
+<button class="mt-2 flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary hover:bg-[#083b9e] text-white text-base font-bold leading-normal tracking-[0.015em] font-sans transition-colors duration-200 shadow-sm focus:ring-2 focus:ring-offset-2 focus:ring-primary" type="submit">
+<span class="truncate">Login</span>
+</button>
+</form>
+</div>
+<!-- Footer Info -->
+<p class="mt-8 text-center text-xs text-[#9aa2b1] dark:text-gray-500 font-sans">
+            © 2024 Bhartiya Nyay AI. All rights reserved.<br/>
+            Compliance with BNS/BNSS protocols.
+        </p>
+</div>
+</body></html>

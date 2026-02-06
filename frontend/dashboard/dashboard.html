@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Legal Drafts Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&amp;family=Noto+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0a47c2",
+                        "deep-navy": "#002347", 
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"],
+                        "body": ["Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-[#111318] dark:text-gray-100 font-display min-h-screen">
+<div class="relative flex h-full w-full flex-col max-w-md mx-auto bg-white dark:bg-[#111318] min-h-screen shadow-xl overflow-hidden">
+<div class="sticky top-0 z-10 bg-white dark:bg-[#111318] border-b border-slate-300 dark:border-gray-800">
+<div class="flex items-center p-4 justify-between">
+<h2 class="text-deep-navy dark:text-white text-xl font-bold leading-tight tracking-[-0.015em] flex-1 font-display">Legal Drafts</h2>
+<div class="flex items-center justify-end gap-2">
+<button class="flex items-center justify-center rounded-full w-10 h-10 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined text-deep-navy dark:text-gray-300" style="font-size: 24px;">search</span>
+</button>
+<button class="flex items-center justify-center rounded-full w-10 h-10 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined text-deep-navy dark:text-gray-300" style="font-size: 24px;">notifications</span>
+</button>
+</div>
+</div>
+<div class="flex gap-2 px-4 pb-4 overflow-x-auto no-scrollbar mask-gradient-right">
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-deep-navy dark:bg-white px-4 transition-colors">
+<p class="text-white dark:text-[#111318] text-sm font-medium leading-normal font-display">All</p>
+</button>
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-gray-100 dark:bg-gray-800 px-4 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors border border-gray-200 dark:border-gray-700">
+<p class="text-gray-700 dark:text-gray-300 text-sm font-medium leading-normal font-display">Drafts</p>
+</button>
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-gray-100 dark:bg-gray-800 px-4 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors border border-gray-200 dark:border-gray-700">
+<p class="text-gray-700 dark:text-gray-300 text-sm font-medium leading-normal font-display">Reviewed</p>
+</button>
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-gray-100 dark:bg-gray-800 px-4 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors border border-gray-200 dark:border-gray-700">
+<p class="text-gray-700 dark:text-gray-300 text-sm font-medium leading-normal font-display">Exported</p>
+</button>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto pb-24 bg-white dark:bg-[#111318]">
+<div class="px-4 py-3 bg-gray-100 dark:bg-gray-900 border-b border-slate-300 dark:border-gray-800">
+<div class="flex justify-between items-center">
+<p class="text-sm font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider font-body">Recent Activity</p>
+<p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider font-body">Status</p>
+</div>
+</div>
+<div class="group relative flex items-start gap-4 p-4 border-b border-slate-300 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors cursor-pointer bg-white dark:bg-[#111318]">
+<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 dark:bg-primary/20 text-primary border border-primary/20">
+<span class="material-symbols-outlined" style="font-size: 24px;">gavel</span>
+</div>
+<div class="flex flex-1 flex-col justify-center min-w-0">
+<div class="flex justify-between items-start mb-1">
+<p class="text-deep-navy dark:text-gray-100 text-base font-bold leading-tight font-display truncate pr-2">Regular Bail Application</p>
+<span class="inline-flex items-center rounded-md bg-gray-200 dark:bg-gray-700 px-2 py-1 text-xs font-bold text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 whitespace-nowrap font-body">CREATED</span>
+</div>
+<p class="text-slate-600 dark:text-gray-400 text-sm font-medium leading-normal font-body">BNSS Sec 437 • Client: R. Kumar</p>
+<p class="text-xs text-gray-500 dark:text-gray-500 mt-1 font-body">Updated 2 hours ago</p>
+</div>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-gray-400" style="font-size: 20px;">chevron_right</span>
+</div>
+</div>
+<div class="group relative flex items-start gap-4 p-4 border-b border-slate-300 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors cursor-pointer bg-white dark:bg-[#111318]">
+<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 dark:bg-primary/20 text-primary border border-primary/20">
+<span class="material-symbols-outlined" style="font-size: 24px;">description</span>
+</div>
+<div class="flex flex-1 flex-col justify-center min-w-0">
+<div class="flex justify-between items-start mb-1">
+<p class="text-deep-navy dark:text-gray-100 text-base font-bold leading-tight font-display truncate pr-2">Anticipatory Bail Plea</p>
+<span class="inline-flex items-center rounded-md bg-gray-200 dark:bg-gray-700 px-2 py-1 text-xs font-bold text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 whitespace-nowrap font-body">REVIEWED</span>
+</div>
+<p class="text-slate-600 dark:text-gray-400 text-sm font-medium leading-normal font-body">BNSS Sec 438 • Client: S. Singh</p>
+<p class="text-xs text-gray-500 dark:text-gray-500 mt-1 font-body">Updated Yesterday</p>
+</div>
+</div>
+<div class="group relative flex items-start gap-4 p-4 border-b border-slate-300 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors cursor-pointer bg-white dark:bg-[#111318]">
+<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 dark:bg-primary/20 text-primary border border-primary/20">
+<span class="material-symbols-outlined" style="font-size: 24px;">folder_open</span>
+</div>
+<div class="flex flex-1 flex-col justify-center min-w-0">
+<div class="flex justify-between items-start mb-1">
+<p class="text-deep-navy dark:text-gray-100 text-base font-bold leading-tight font-display truncate pr-2">Writ Petition (Civil)</p>
+<span class="inline-flex items-center rounded-md bg-gray-200 dark:bg-gray-700 px-2 py-1 text-xs font-bold text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 whitespace-nowrap font-body">EXPORTED</span>
+</div>
+<p class="text-slate-600 dark:text-gray-400 text-sm font-medium leading-normal font-body">Article 226 • Client: Tech Solutions Ltd</p>
+<p class="text-xs text-gray-500 dark:text-gray-500 mt-1 font-body">Updated 2 days ago</p>
+</div>
+</div>
+<div class="group relative flex items-start gap-4 p-4 border-b border-slate-300 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors cursor-pointer bg-white dark:bg-[#111318]">
+<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 dark:bg-primary/20 text-primary border border-primary/20">
+<span class="material-symbols-outlined" style="font-size: 24px;">balance</span>
+</div>
+<div class="flex flex-1 flex-col justify-center min-w-0">
+<div class="flex justify-between items-start mb-1">
+<p class="text-deep-navy dark:text-gray-100 text-base font-bold leading-tight font-display truncate pr-2">FIR Quashing Petition</p>
+<span class="inline-flex items-center rounded-md bg-gray-200 dark:bg-gray-700 px-2 py-1 text-xs font-bold text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 whitespace-nowrap font-body">CREATED</span>
+</div>
+<p class="text-slate-600 dark:text-gray-400 text-sm font-medium leading-normal font-body">Section 482 CrPC • Client: A. Gupta</p>
+<p class="text-xs text-gray-500 dark:text-gray-500 mt-1 font-body">Updated 3 days ago</p>
+</div>
+</div>
+<div class="group relative flex items-start gap-4 p-4 border-b border-slate-300 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors cursor-pointer bg-white dark:bg-[#111318]">
+<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 dark:bg-primary/20 text-primary border border-primary/20">
+<span class="material-symbols-outlined" style="font-size: 24px;">gavel</span>
+</div>
+<div class="flex flex-1 flex-col justify-center min-w-0">
+<div class="flex justify-between items-start mb-1">
+<p class="text-deep-navy dark:text-gray-100 text-base font-bold leading-tight font-display truncate pr-2">Defamation Notice</p>
+<span class="inline-flex items-center rounded-md bg-gray-200 dark:bg-gray-700 px-2 py-1 text-xs font-bold text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 whitespace-nowrap font-body">DRAFT</span>
+</div>
+<p class="text-slate-600 dark:text-gray-400 text-sm font-medium leading-normal font-body">BNS Sec 356 • Client: Media House</p>
+<p class="text-xs text-gray-500 dark:text-gray-500 mt-1 font-body">Updated 5 days ago</p>
+</div>
+</div>
+</div>
+<div class="absolute bottom-6 left-0 right-0 px-5 flex justify-center pointer-events-none">
+<button class="pointer-events-auto shadow-xl shadow-primary/30 flex cursor-pointer items-center justify-center rounded-full h-14 bg-primary hover:bg-blue-700 active:scale-95 transition-all text-white text-base font-bold leading-normal tracking-[0.015em] min-w-0 gap-3 px-6">
+<span class="material-symbols-outlined" style="font-size: 24px;">add</span>
+<span class="font-display">New Draft</span>
+</button>
+</div>
+<div class="bg-white dark:bg-[#111318] border-t border-slate-300 dark:border-gray-800 h-16 w-full flex justify-around items-center px-2">
+<div class="flex flex-col items-center justify-center w-16 h-full text-primary cursor-pointer">
+<span class="material-symbols-outlined" style="font-size: 24px;">dashboard</span>
+<span class="text-[10px] font-bold mt-1 font-body">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center w-16 h-full text-slate-500 dark:text-gray-500 hover:text-slate-700 dark:hover:text-gray-300 cursor-pointer">
+<span class="material-symbols-outlined" style="font-size: 24px;">folder</span>
+<span class="text-[10px] font-medium mt-1 font-body">Files</span>
+</div>
+<div class="flex flex-col items-center justify-center w-16 h-full text-slate-500 dark:text-gray-500 hover:text-slate-700 dark:hover:text-gray-300 cursor-pointer">
+<span class="material-symbols-outlined" style="font-size: 24px;">schedule</span>
+<span class="text-[10px] font-medium mt-1 font-body">Recent</span>
+</div>
+<div class="flex flex-col items-center justify-center w-16 h-full text-slate-500 dark:text-gray-500 hover:text-slate-700 dark:hover:text-gray-300 cursor-pointer">
+<span class="material-symbols-outlined" style="font-size: 24px;">settings</span>
+<span class="text-[10px] font-medium mt-1 font-body">Settings</span>
+</div>
+</div>
+</div>
+
+</body></html>

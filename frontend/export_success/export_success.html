@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Export Success</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0a47c2",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#111318] dark:text-white antialiased transition-colors duration-200">
+<div class="relative flex min-h-screen w-full flex-col overflow-hidden mx-auto max-w-md bg-background-light dark:bg-background-dark shadow-xl ring-1 ring-black/5">
+<!-- Top App Bar -->
+<header class="flex items-center justify-between px-4 py-3 bg-white/80 dark:bg-[#101622]/80 backdrop-blur-md sticky top-0 z-10 border-b border-gray-200/50 dark:border-gray-800/50">
+<div class="w-10"></div> <!-- Spacer for centering -->
+<h2 class="text-lg font-bold leading-tight tracking-tight flex-1 text-center">Export</h2>
+<div class="w-10 flex justify-end">
+<button class="text-gray-500 dark:text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col items-center px-6 pt-8 pb-6 w-full animate-fade-in-up">
+<!-- Document Preview Card -->
+<div class="w-full max-w-[280px] aspect-[3/4] bg-white dark:bg-[#1e2736] rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-2 relative mb-8 group transition-transform hover:scale-[1.02] duration-300">
+<!-- Decorative document binding look -->
+<div class="absolute left-2 top-2 bottom-2 w-1 bg-gray-100 dark:bg-gray-800 rounded-full"></div>
+<!-- Document Content Placeholder -->
+<div class="w-full h-full bg-gray-50 dark:bg-[#151c2a] rounded-lg overflow-hidden flex flex-col">
+<div class="h-32 w-full bg-cover bg-center" data-alt="Abstract legal document header close up" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA2fcaCyPC80-IVNr0_J5a1zh1GMs_yNv49h7axZjZf0GuLRuC9xa-uJ2nfRNbroRVA3a--6dgcRm7HMIlYOtguL2OePn0lI7tNMVbidzKZ0ehqED97kDbMFr099-XND0MdbBo8SvMzy7k6LAdVn6ERruh4dyFoFNEZjevxIAoJ078vGRC972QQGnkhAFk56c6j3qeM0OzfYLvni0yPiK2SBZdqIhg4q93FHyluB_M4co-ohA5s88XTFPcRvXA_JtrMDWuTZ1SMeFM");'>
+</div>
+<div class="p-4 space-y-2 opacity-60">
+<div class="h-2 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
+<div class="h-2 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
+<div class="h-2 bg-gray-200 dark:bg-gray-700 rounded w-5/6"></div>
+<div class="h-2 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
+</div>
+<!-- Success Badge Overlay -->
+<div class="absolute -bottom-4 -right-4 bg-green-500 text-white rounded-full p-2 shadow-lg ring-4 ring-background-light dark:ring-background-dark flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-size: 28px;">check</span>
+</div>
+</div>
+</div>
+<!-- Success Message -->
+<div class="text-center space-y-3 mt-2">
+<h1 class="text-2xl font-bold tracking-tight text-[#111318] dark:text-white">Export Successful</h1>
+<p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed max-w-[280px] mx-auto">
+                    Your legal draft has been generated successfully and is compliant with BNS/BNSS standards.
+                </p>
+</div>
+</main>
+<!-- Footer Actions -->
+<footer class="p-6 bg-background-light dark:bg-background-dark w-full pb-8">
+<div class="flex flex-col gap-3">
+<!-- Primary Action -->
+<button class="flex w-full cursor-pointer items-center justify-center rounded-xl h-14 px-5 bg-primary hover:bg-blue-700 text-white gap-3 shadow-md shadow-blue-900/10 transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined">download</span>
+<span class="text-base font-bold tracking-wide">Download DOCX</span>
+</button>
+<!-- Secondary Action -->
+<button class="flex w-full cursor-pointer items-center justify-center rounded-xl h-14 px-5 bg-white dark:bg-[#1e2736] text-[#111318] dark:text-white border border-gray-200 dark:border-gray-700 gap-2 hover:bg-gray-50 dark:hover:bg-[#253042] transition-colors active:scale-[0.98]">
+<span class="text-base font-medium">Back to Dashboard</span>
+</button>
+</div>
+</footer>
+</div>
+</body></html>
