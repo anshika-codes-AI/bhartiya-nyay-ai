@@ -1,0 +1,446 @@
+<!doctype html>
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Draft Preview (High Contrast)</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#002147", // Deep Navy for high contrast
+              secondary: "#F3F4F6", // Requested Citation BG
+              "header-navy": "#0a192f", // Even darker navy for headers
+              "pure-black": "#000000",
+            },
+            fontFamily: {
+              display: ["Noto Serif", "serif"],
+              sans: ["Noto Sans", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .legal-scroll::-webkit-scrollbar {
+        width: 8px;
+      }
+      .legal-scroll::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+      .legal-scroll::-webkit-scrollbar-thumb {
+        background-color: #8899a6;
+        border-radius: 4px;
+      }
+      .legal-scroll::-webkit-scrollbar-thumb:hover {
+        background-color: #555;
+      }
+    </style>
+    <style>
+      body {
+        min-height: 100dvh;
+      }
+    </style>
+    <style>
+      body {
+        min-height: max(884px, 100dvh);
+      }
+    </style>
+  </head>
+  <body
+    class="bg-white min-h-screen flex flex-col font-sans text-pure-black overflow-hidden"
+  >
+    <header
+      class="flex items-center bg-white border-b-2 border-primary/10 p-4 pb-3 justify-between shrink-0 z-20 shadow-sm relative"
+    >
+      <button
+        class="text-header-navy flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-secondary transition-colors"
+      >
+        <span class="material-symbols-outlined text-[28px]">arrow_back</span>
+      </button>
+      <h2
+        class="text-header-navy text-xl font-bold leading-tight tracking-tight flex-1 text-center pr-10"
+      >
+        Draft Preview
+      </h2>
+    </header>
+    <div class="flex-1 flex flex-col md:flex-row overflow-hidden relative">
+      <main
+        class="flex-1 overflow-y-auto legal-scroll bg-white p-6 pb-32 md:pb-6 relative order-1 md:order-1 border-r border-slate-200"
+      >
+        <div
+          id = "draftContainer"
+          class="max-w-3xl mx-auto font-display text-pure-black leading-relaxed"
+        >
+          <!-- <div class="text-center mb-8 space-y-2 mt-2">
+            <h3
+              class="text-xl sm:text-2xl font-bold tracking-wide uppercase text-pure-black"
+            >
+              In The High Court of Delhi
+            </h3>
+            <p class="text-sm text-black uppercase tracking-widest font-bold">
+              At New Delhi
+            </p>
+            <p class="text-xs text-slate-800 uppercase font-bold">
+              (Criminal Appellate Jurisdiction)
+            </p>
+          </div>
+          <div
+            class="text-center mb-8 border-y-[2.5px] border-pure-black py-3 w-3/4 mx-auto"
+          >
+            <p class="font-extrabold text-pure-black">
+              CRIMINAL APPEAL NO. ______ OF 2024
+            </p>
+          </div>
+          <div class="mb-10 space-y-5">
+            <div class="flex justify-between items-start">
+              <div class="w-1/2">
+                <p class="font-bold uppercase text-pure-black">
+                  In The Matter Of:
+                </p>
+              </div>
+            </div>
+            <div class="pl-6 space-y-5 border-l-2 border-slate-200">
+              <div>
+                <p class="font-bold uppercase text-lg">State of NCT of Delhi</p>
+                <p
+                  class="text-sm font-semibold italic text-slate-800 text-right"
+                >
+                  ... Appellant
+                </p>
+              </div>
+              <div class="text-center font-black text-sm tracking-widest my-3">
+                VERSUS
+              </div>
+              <div>
+                <p class="font-bold uppercase text-lg">XYZ &amp; Others</p>
+                <p
+                  class="text-sm font-semibold italic text-slate-800 text-right"
+                >
+                  ... Respondent
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="mb-8">
+            <h4
+              class="font-bold underline decoration-2 underline-offset-4 mb-5 uppercase text-sm tracking-wide text-header-navy"
+            >
+              Most Respectfully Showeth:
+            </h4>
+            <div class="space-y-5 text-justify text-[1.05rem]">
+              <div class="flex gap-4">
+                <span class="font-bold shrink-0">1.</span>
+                <p>
+                  That the present appeal is filed under Section 482 of the
+                  Bharatiya Nagarik Suraksha Sanhita, 2023 (BNSS) against the
+                  impugned order dated 12.01.2024 passed by the Ld. Sessions
+                  Judge in Case No. 123/2023.
+                </p>
+              </div>
+              <div class="flex gap-4">
+                <span class="font-bold shrink-0">2.</span>
+                <p>
+                  That the brief facts of the case are that the Appellant lodged
+                  an FIR No. 45/2023 at PS Connaught Place under Sections 302/34
+                  of the Bharatiya Nyaya Sanhita (BNS) alleging the involvement
+                  of the Respondent in the commission of the offence.
+                </p>
+              </div>
+              <div class="flex gap-4">
+                <span class="font-bold shrink-0">3.</span>
+                <p>
+                  That the investigation was conducted by the IO, and a
+                  charge-sheet was filed. However, the Ld. Trial Court, without
+                  appreciating the material on record, discharged the Respondent
+                  via the impugned order.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="mb-8">
+            <h4
+              class="font-bold underline decoration-2 underline-offset-4 mb-5 uppercase text-center text-sm tracking-wide text-header-navy"
+            >
+              Grounds
+            </h4>
+            <div class="space-y-5 text-justify text-[1.05rem]">
+              <div class="flex gap-4">
+                <span class="font-bold shrink-0">A.</span>
+                <p>
+                  <span class="font-bold">BECAUSE</span> the Ld. Trial Court
+                  failed to appreciate that at the stage of framing of charges,
+                  only a prima facie case needs to be seen, and a roving enquiry
+                  is impermissible in law.
+                </p>
+              </div>
+              <div class="flex gap-4">
+                <span class="font-bold shrink-0">B.</span>
+                <p>
+                  <span class="font-bold">BECAUSE</span> the impugned order is
+                  contrary to the settled principles of law laid down by the
+                  Hon'ble Supreme Court regarding the scope of Section 227/228
+                  of the BNSS (formerly CrPC).
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="mb-12">
+            <h4
+              class="font-bold underline decoration-2 underline-offset-4 mb-5 uppercase text-center text-sm tracking-wide text-header-navy"
+            >
+              Prayer
+            </h4>
+            <p class="mb-4 text-[1.05rem]">
+              It is, therefore, most respectfully prayed that this Hon'ble Court
+              may be pleased to:
+            </p>
+            <div class="pl-6 space-y-4 text-[1.05rem]">
+              <div class="flex gap-4">
+                <span class="font-bold shrink-0">i.</span>
+                <p>
+                  Set aside the impugned order dated 12.01.2024 passed by the
+                  Ld. Sessions Judge;
+                </p>
+              </div>
+              <div class="flex gap-4">
+                <span class="font-bold shrink-0">ii.</span>
+                <p>
+                  Direct the Ld. Trial Court to frame charges against the
+                  Respondent in accordance with law;
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col items-end space-y-8 mt-16 pr-4">
+            <div class="text-right">
+              <p class="font-bold uppercase text-sm mb-8">
+                Advocate for the Appellant
+              </p>
+              <div class="h-px bg-black w-48 mb-2"></div>
+              <p class="text-sm font-serif">(Name &amp; Signature)</p>
+            </div>
+          </div> -->
+        </div>
+      </main>
+      <aside
+        class="w-full md:w-[35%] lg:w-[30%] bg-secondary border-t md:border-t-0 md:border-l border-slate-300 flex flex-col h-[40vh] md:h-full order-2 md:order-2 shrink-0 shadow-[inset_0_2px_4px_rgba(0,0,0,0.06)]"
+      >
+        <div
+          class="p-4 bg-secondary border-b border-slate-300 flex justify-between items-center sticky top-0 z-10"
+        >
+          <h3
+            class="font-bold text-header-navy uppercase tracking-wider text-sm flex items-center gap-2"
+          >
+            <span class="material-symbols-outlined text-[20px]">menu_book</span>
+            Citations (3)
+          </h3>
+          <span
+            class="bg-primary text-white text-xs font-bold px-2 py-1 rounded"
+            >BNS COMPLIANT</span
+          >
+        </div>
+        <div class="overflow-y-auto legal-scroll p-4 space-y-4 flex-1">
+          <div
+            class="bg-white p-4 rounded border border-slate-200 shadow-sm hover:shadow-md transition-shadow cursor-pointer border-l-4 border-l-primary group"
+          >
+            <div class="flex justify-between items-start mb-2">
+              <span
+                class="text-[10px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2 py-0.5 rounded"
+                >Supreme Court</span
+              >
+              <span
+                class="material-symbols-outlined text-slate-400 group-hover:text-primary text-[18px]"
+                >open_in_new</span
+              >
+            </div>
+            <h4
+              class="font-serif font-bold text-header-navy text-lg leading-tight mb-1"
+            >
+              State of Bihar v. Ramesh Singh
+            </h4>
+            <p class="text-xs text-slate-600 font-medium mb-3">
+              (1977) 4 SCC 39
+            </p>
+            <p class="text-sm text-slate-800 line-clamp-3 leading-snug">
+              <span class="font-bold text-primary">Key Holding:</span> At the
+              stage of framing charge, the Court is not to see whether there is
+              sufficient ground for conviction of the accused...
+            </p>
+          </div>
+          <div
+            class="bg-white p-4 rounded border border-slate-200 shadow-sm hover:shadow-md transition-shadow cursor-pointer border-l-4 border-l-primary group"
+          >
+            <div class="flex justify-between items-start mb-2">
+              <span
+                class="text-[10px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2 py-0.5 rounded"
+                >Delhi High Court</span
+              >
+              <span
+                class="material-symbols-outlined text-slate-400 group-hover:text-primary text-[18px]"
+                >open_in_new</span
+              >
+            </div>
+            <h4
+              class="font-serif font-bold text-header-navy text-lg leading-tight mb-1"
+            >
+              Union of India v. Prafulla Kumar Samal
+            </h4>
+            <p class="text-xs text-slate-600 font-medium mb-3">
+              (1979) 3 SCC 4
+            </p>
+            <p class="text-sm text-slate-800 line-clamp-3 leading-snug">
+              <span class="font-bold text-primary">Context:</span> Principles
+              regarding discharge under Section 227 of the Code (now BNSS)...
+            </p>
+          </div>
+          <div
+            class="bg-white p-4 rounded border border-slate-200 shadow-sm hover:shadow-md transition-shadow cursor-pointer border-l-4 border-l-slate-300 hover:border-l-primary group opacity-75 hover:opacity-100"
+          >
+            <div class="flex justify-between items-start mb-2">
+              <span
+                class="text-[10px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2 py-0.5 rounded"
+                >Supreme Court</span
+              >
+            </div>
+            <h4
+              class="font-serif font-bold text-header-navy text-lg leading-tight mb-1"
+            >
+              Sajjan Kumar v. CBI
+            </h4>
+            <p class="text-xs text-slate-600 font-medium mb-2">
+              (2010) 9 SCC 368
+            </p>
+            <p class="text-sm text-slate-500 italic">Relevance Score: 65%</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+    <div
+      class="fixed bottom-0 left-0 w-full bg-white border-t border-slate-200 p-4 pb-6 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]"
+    >
+      <div class="flex gap-4 max-w-4xl mx-auto">
+        <button
+          type="button"
+          id="generateDraftBtn"
+          class="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 border-2 border-primary text-primary font-bold rounded-lg hover:bg-primary/5 transition active:scale-[0.98]"
+        >
+          <span class="material-symbols-outlined text-[22px]">edit_note</span>
+          <span>Edit Draft</span>
+        </button>
+        <button
+          type="button"
+          id="exportBtn"
+          class="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 bg-primary text-white font-bold rounded-lg shadow-lg hover:bg-header-navy transition active:scale-[0.98]"
+        >
+          <span class="material-symbols-outlined text-[22px]">file_export</span>
+          <span>Export DOCX</span>
+        </button>
+      </div>
+    </div>
+<script>
+function getDraftId() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("draft_id");
+}
+
+document.getElementById("generateDraftBtn").addEventListener("click", function (e) {
+  e.preventDefault();
+
+  const draftId = getDraftId();
+
+  if (!draftId) {
+    alert("Draft ID missing in URL");
+    return;
+  }
+
+  fetch(`http://127.0.0.1:8000/api/drafts/${draftId}/ai-draft/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    credentials: "include"
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (!data.draft_text) {
+        alert("Draft text missing");
+        return;
+      }
+
+      document.getElementById("draftContainer").innerHTML = `
+        <pre style="
+          white-space: pre-wrap;
+          font-family: 'Noto Serif', serif;
+          line-height: 1.8;
+          font-size: 1.05rem;
+        ">${data.draft_text}</pre>
+      `;
+    })
+    .catch(err => {
+      console.error(err);
+      alert("Error generating draft");
+    });
+});
+</script>
+
+
+<script>
+document.getElementById("exportBtn").addEventListener("click", function (e) {
+  e.preventDefault();
+  e.stopPropagation();
+
+  const draftId = getDraftId();
+
+
+  if (!draftId) {
+    alert("Draft ID missing");
+    return;
+  }
+
+  fetch(`http://127.0.0.1:8000/api/drafts/${draftId}/export/`, {
+    method: "POST",
+    credentials: "include"
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Export failed");
+      }
+      return response.blob();
+    })
+    .then(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `Bhartiya_Nyay_Draft_${draftId}.docx`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    })
+    .catch(err => {
+      console.error("EXPORT ERROR:", err);
+      alert("Failed to export DOCX");
+    });
+});
+</script>
+
+  </body>
+</html>

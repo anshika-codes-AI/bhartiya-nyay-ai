@@ -62,8 +62,12 @@ class AIDraftingError(Exception):
 
 
 def generate_ai_draft(draft, blueprint):
-    if draft.status != DraftStatus.DRAFT_GENERATED.value:
+    if draft.status not in [
+        DraftStatus.LEGAL_MAPPED.value,
+        DraftStatus.DRAFT_GENERATED.value,
+    ]:
         raise AIDraftingError("Draft not ready for AI drafting")
+
 
     ai_output = call_llm(
         system_prompt=DRAFTING_SYSTEM_PROMPT,

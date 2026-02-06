@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import render
 from drafting.draft_generation import generate_draft_blueprint
 # Create your views here.
@@ -24,8 +25,37 @@ class DraftTypeListView(APIView):
         serializer = DraftTypeSerializer(draft_types, many=True)
         return Response(serializer.data)
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 
+from .serializers import DraftCreateSerializer
+
+from drafting.authentication import CsrfExemptSessionAuthentication
+from rest_framework.permissions import IsAuthenticated
+from django.http import FileResponse
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+from drafting.models import Draft, DraftContent
+from drafting.docx_export import export_draft_to_docx
+from rest_framework.response import Response
+
+
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def draft_preview_page(request):
+    return render(request, "draft_preview.html")
+
+    
+@method_decorator(csrf_exempt, name="dispatch")
 class DraftCreateView(APIView):
+    authentication_classes = [CsrfExemptSessionAuthentication, BasicAuthentication]
+
     def post(self, request):
         serializer = DraftCreateSerializer(
             data=request.data,
@@ -38,6 +68,7 @@ class DraftCreateView(APIView):
                 status=status.HTTP_201_CREATED
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     
 class DraftFactIntakeView(APIView):
     def post(self, request, draft_id):
@@ -179,8 +210,10 @@ class DraftGenerateView(APIView):
             },
             status=status.HTTP_200_OK
         )
-
+@method_decorator(csrf_exempt, name="dispatch")
 class DraftAIDraftingView(APIView):
+    authentication_classes = [CsrfExemptSessionAuthentication]
+    permission_classes = [IsAuthenticated]
     def post(self, request, draft_id):
         try:
             draft = Draft.objects.get(
@@ -205,7 +238,8 @@ class DraftAIDraftingView(APIView):
                     for m in draft.legal_mappings.all()
                 ]
             }
-
+            draft.status = DraftStatus.DRAFT_GENERATED.value
+            draft.save()
             ai_text = generate_ai_draft(draft, blueprint)
             latest_version = draft.contents.count() + 1
 
@@ -227,47 +261,48 @@ class DraftAIDraftingView(APIView):
             },
             status=status.HTTP_200_OK
         )
+
 class DraftExportView(APIView):
+    authentication_classes = []
+    permission_classes = []
+
     def post(self, request, draft_id):
         try:
-            draft = Draft.objects.get(
-                id=draft_id,
-                user=request.user
-            )
-        except Draft.DoesNotExist:
-            return Response(
-                {"error": "Draft not found"},
-                status=status.HTTP_404_NOT_FOUND
-            )
+            draft = Draft.objects.get(id=draft_id)
 
-        latest_content = draft.contents.order_by("-version").first()
-
-        if not latest_content:
-            return Response(
-                {"error": "No draft content available"},
-                status=status.HTTP_400_BAD_REQUEST
+            latest_content = (
+                DraftContent.objects
+                .filter(draft=draft)
+                .order_by("-version")
+                .first()
             )
 
-        draft_text = latest_content.content
+            if not latest_content:
+                return Response(
+                    {"error": "No draft content found"},
+                    status=400
+                )
 
-        if not draft_text:
-            return Response(
-                {"error": "Draft text required"},
-                status=status.HTTP_400_BAD_REQUEST
+            file_path = export_draft_to_docx(
+                draft,
+                latest_content.content
             )
 
-        try:
-            path = export_draft_to_docx(draft, draft_text)
+            if not os.path.exists(file_path):
+                return Response(
+                    {"error": "DOCX file not created"},
+                    status=500
+                )
+
+            return FileResponse(
+                open(file_path, "rb"),
+                as_attachment=True,
+                filename=f"Bhartiya_Nyay_Draft_{draft.id}.docx"
+            )
+
         except Exception as e:
+            print("EXPORT ERROR:", e)
             return Response(
                 {"error": str(e)},
-                status=status.HTTP_400_BAD_REQUEST
+                status=500
             )
-
-        return Response(
-            {
-                "status": draft.status,
-                "file_path": path
-            },
-            status=status.HTTP_200_OK
-        )
